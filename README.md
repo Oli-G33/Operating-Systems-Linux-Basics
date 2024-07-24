@@ -46,3 +46,53 @@ fi
 
 
 ```
+
+
+## EXERCISE 3: Bash Script - User Processes
+
+
+
+```bash
+
+#!/bin/bash
+
+# Get the current user's username
+user=$USER
+
+# Print a message indicating the processes being checked
+echo "Checking processes for user: $user"
+
+# List all processes for the current user
+output=$(ps aux | grep "$user")
+
+# Print the output and a message indicating the end of the process list
+echo $output
+echo "Process listing complete."
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
