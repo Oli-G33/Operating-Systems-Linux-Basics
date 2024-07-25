@@ -89,7 +89,8 @@ user=$USER
 echo "Checking processes for user: $user"
 
 # List all processes for the current user
-processes=$(ps aux | grep "^$user" | grep -v grep)
+processes=$(ps aux | grep ^$user" | grep -v grep | awk '{print $2, $3, $4, $11}' | sort -k3 -nr | column -t)
+
 
 # Ask user for sorting preference
 echo "How would you like to sort the processes?"
@@ -101,7 +102,7 @@ read -p "Enter your choice (1 or 2): " choice
 
 if [ "$choice" -eq 1 ]; then
     echo "Sorting by memory usage..."
-    # Print the header, then sort by memory (RSS) and print the processes
+    # Print the header, then sort by memory and print the processes
     echo "$processes" | sort -k4 -nr
 elif [ "$choice" -eq 2 ]; then
     echo "Sorting by CPU usage..."
