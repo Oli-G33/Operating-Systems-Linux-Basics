@@ -73,9 +73,49 @@ echo "Process listing complete."
 ```
 
 
+## EXERCISE 4: Bash Script - User Processes Sorted
 
 
 
+
+```bash
+
+#!/bin/bash
+
+# Find username
+user=$USER
+
+# Print a message indicating the processes being checked
+echo "Checking processes for user: $user"
+
+# List all processes for the current user
+processes=$(ps aux | grep "^$user" | grep -v grep)
+
+# Ask user for sorting preference
+echo "How would you like to sort the processes?"
+echo "1. By memory usage"
+echo "2. By CPU usage"
+read -p "Enter your choice (1 or 2): " choice
+
+# Sort and print the processes based on the user's input
+
+if [ "$choice" -eq 1 ]; then
+    echo "Sorting by memory usage..."
+    # Print the header, then sort by memory (RSS) and print the processes
+    echo "$processes" | sort -k4 -nr
+elif [ "$choice" -eq 2 ]; then
+    echo "Sorting by CPU usage..."
+    # Print the header, then sort by CPU (CPU%) and print the processes
+    echo "$processes" | sort -k3 -nr
+else
+    echo "Invalid choice. Printing unsorted processes..."
+    echo "$processes"
+fi
+
+echo "Process listing complete."
+
+
+```
 
 
 
